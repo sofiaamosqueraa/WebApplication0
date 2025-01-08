@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="container mt-5">
+    <!-- Cabeçalho -->
+    <header class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: #6A0DAD;">Bem-vindo ao <span style="color: #2ED9C3;">WebApplication0</span></h1>
+        <p class="lead" style="color: #B0A8B9;">Gerencie os seus utilizadores de forma simples e eficiente com uma interface moderna e intuitiva.</p>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="row g-4">
+        <!-- Secção 1 -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4" style="background-color: #F3F0FF;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-person-plus-fill" style="color: #6A0DAD; font-size: 2.5rem;"></i>
+                    </div>
+                    <h2 class="h5 fw-bold" style="color: #4B0082;">Registar-se</h2>
+                    <p style="color: #857A91;">Crie uma conta para começar a utilizar os nossos serviços de forma rápida e segura.</p>
+                    <a asp-controller="Account" asp-action="Register"
+                       class="btn w-100 rounded-pill fw-bold"
+                       style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; transition: all 0.3s ease;">
+                        Registar-se
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secção 2 -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4" style="background-color: #F3F0FF;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-box-arrow-in-right" style="color: #6A0DAD; font-size: 2.5rem;"></i>
+                    </div>
+                    <h2 class="h5 fw-bold" style="color: #4B0082;">Iniciar Sessão</h2>
+                    <p style="color: #857A91;">Aceda à sua conta para explorar todos os recursos e gerir os seus dados de forma prática e segura.</p>
+                    <a asp-controller="Account" asp-action="Login"
+                       class="btn w-100 rounded-pill fw-bold"
+                       style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; transition: all 0.3s ease;">
+                        Iniciar Sessão
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

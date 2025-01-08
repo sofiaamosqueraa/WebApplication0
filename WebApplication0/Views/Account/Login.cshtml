@@ -1,0 +1,30 @@
+﻿<div class="container mt-5">
+    <!-- Título -->
+    <h2 class="text-center mb-4 fw-bold" style="color: #6A0DAD;">Login</h2>
+
+    <!-- Formulario -->
+    <form asp-action="Login" class="p-4 rounded-4 shadow-sm mx-auto" style="max-width: 500px; background: linear-gradient(90deg, #F3E9FF, #E0FAF7);">
+        <!-- Campo de Email -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" style="color: #4B0082;">Email</label>
+            <input name="email" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" />
+        </div>
+
+        <!-- Campo de Contraseña -->
+        <div class="mb-3">
+            <label class="form-label fw-bold" style="color: #4B0082;">Contraseña</label>
+            <input name="password" type="password" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" />
+        </div>
+
+        <!-- Botón de Login -->
+        <button type="submit" class="btn w-100 rounded-pill fw-bold"
+                style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; border: none; transition: all 0.3s ease;">
+            Iniciar Sessão
+        </button>
+
+        <!-- Mensaje de error -->
+        <div class="mt-3 text-danger text-center fw-semibold">
+            @ViewBag.Error
+        </div>
+    </form>
+</div>
