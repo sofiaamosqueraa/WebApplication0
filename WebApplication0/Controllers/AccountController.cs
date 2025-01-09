@@ -27,10 +27,11 @@ public class AccountController : Controller
     }
 
     public IActionResult Login() => View();
+
     [HttpPost]
-    public IActionResult Login(string email, string password)
+    public IActionResult Login(User model)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Email == email);
+        var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
 
         if (user == null)
         {
@@ -38,7 +39,7 @@ public class AccountController : Controller
             return RedirectToAction("Register");
         }
 
-        if (user.Password == password)
+        if (user.Password == model.Password)
         {
             HttpContext.Session.SetString("UserEmail", user.Email);
             HttpContext.Session.SetString("UserName", user.Name);
@@ -49,14 +50,26 @@ public class AccountController : Controller
                 return RedirectToAction("ListUsers");
             }
 
+           
+            if (model.Email.EndsWith("@pontual.pt"))
+            {
+                return RedirectToAction("DashboardPontual");
+            }
+            else if (model.Email.EndsWith("@epfundao.edu.pt"))
+            {
+                return RedirectToAction("DashboardEpfundao");
+            }
+            else if (model.Email.EndsWith("@gmail.com"))
+            {
+                return RedirectToAction("Dashboard");
+            }
+
             return RedirectToAction("Dashboard");
         }
 
         ViewBag.Error = "Palavra-passe incorreta.";
         return View();
     }
-
-
 
     public IActionResult Dashboard()
     {
@@ -70,6 +83,29 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
+    public IActionResult DashboardPontual()
+    {
+        if (HttpContext.Session.GetString("UserEmail") != null)
+        {
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            return View();
+        }
+
+        return RedirectToAction("Login");
+    }
+
+    public IActionResult DashboardEpfundao()
+    {
+        if (HttpContext.Session.GetString("UserEmail") != null)
+        {
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            return View();
+        }
+
+        return RedirectToAction("Login");
+    }
     [HttpGet]
     public IActionResult ListUsers()
     {
@@ -85,10 +121,12 @@ public class AccountController : Controller
             return Unauthorized();
         }
 
-        var users = _context.Users.ToList();
+        var users = _context.Users.OrderBy(u => u.Id).ToList();
+        ViewBag.TotalUsers = users.Count;
+        ViewBag.AdminUsers = users.Count(u => u.IsAdmin);
+
         return View(users);
     }
-
 
     [HttpPost]
     public IActionResult DeleteUser(int id)
@@ -101,4 +139,14 @@ public class AccountController : Controller
         }
         return RedirectToAction("ListUsers");
     }
+
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Home");
+    }
+
+
+
 }
+
