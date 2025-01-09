@@ -1,8 +1,15 @@
-﻿<div class="container mt-5">
-    <!-- Título -->
+﻿@{
+    var isAdmin = Context.Session.GetString("IsAdmin") == "True";
+    if (!isAdmin)
+    {
+        <h1 class="text-center mt-5">Acesso Negado</h1>
+        return;
+    }
+}
+
+<div class="container mt-5">
     <h1 class="text-center mb-4 fw-bold" style="color: #6A0DAD;">Lista de Usuários</h1>
 
-    <!-- Tabla -->
     <div class="table-responsive">
         <table class="table table-hover table-bordered align-middle shadow-sm mt-4" style="background: linear-gradient(90deg, #F3E9FF, #E0FAF7);">
             <thead class="text-white" style="background: linear-gradient(90deg, #6A0DAD, #2ED9C3);">
@@ -10,6 +17,7 @@
                     <th scope="col" class="text-center">ID</th>
                     <th scope="col" class="text-center">Nome</th>
                     <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,9 +27,17 @@
                         <td class="text-center fw-bold" style="color: #4B0082;">@user.Id</td>
                         <td class="text-center fw-bold" style="color: #4B0082;">@user.Name</td>
                         <td class="text-center" style="color: #857A91;">@user.Email</td>
+                        <td class="text-center">
+                            <form asp-action="DeleteUser" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+

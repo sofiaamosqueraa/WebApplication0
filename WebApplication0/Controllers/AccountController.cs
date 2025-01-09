@@ -27,39 +27,43 @@ public class AccountController : Controller
     }
 
     public IActionResult Login() => View();
-
     [HttpPost]
     public IActionResult Login(string email, string password)
     {
-        // Verificar si el usuario existe
         var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
         if (user == null)
         {
-            // Si no existe, redirigir al registro
-            TempData["Message"] = "No tienes una cuenta registrada. Por favor, crea una nueva cuenta.";
+            TempData["Message"] = "Não tens uma conta registada. Por favor, cria uma nova conta.";
             return RedirectToAction("Register");
         }
 
-        // Verificar contraseña
         if (user.Password == password)
         {
-            TempData["UserEmail"] = user.Email;
-            TempData["UserName"] = user.Name;
+            HttpContext.Session.SetString("UserEmail", user.Email);
+            HttpContext.Session.SetString("UserName", user.Name);
+            HttpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
+
+            if (user.IsAdmin)
+            {
+                return RedirectToAction("ListUsers");
+            }
 
             return RedirectToAction("Dashboard");
         }
 
-        ViewBag.Error = "Contraseña incorrecta.";
+        ViewBag.Error = "Palavra-passe incorreta.";
         return View();
     }
 
+
+
     public IActionResult Dashboard()
     {
-        if (TempData["UserEmail"] != null)
+        if (HttpContext.Session.GetString("UserEmail") != null)
         {
-            ViewBag.UserEmail = TempData["UserEmail"];
-            ViewBag.UserName = TempData["UserName"];
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
 
@@ -69,7 +73,32 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult ListUsers()
     {
+        var userEmail = HttpContext.Session.GetString("UserEmail");
+        if (userEmail == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
+        if (user == null || !user.IsAdmin)
+        {
+            return Unauthorized();
+        }
+
         var users = _context.Users.ToList();
         return View(users);
+    }
+
+
+    [HttpPost]
+    public IActionResult DeleteUser(int id)
+    {
+        var user = _context.Users.Find(id);
+        if (user != null)
+        {
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
+        return RedirectToAction("ListUsers");
     }
 }

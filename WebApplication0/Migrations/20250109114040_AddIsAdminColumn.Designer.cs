@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication0.Data;
 
-
 #nullable disable
 
 namespace WebApplication0.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250108123204_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250109114040_AddIsAdminColumn")]
+    partial class AddIsAdminColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +24,7 @@ namespace WebApplication0.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("WebApplication0.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,6 +35,9 @@ namespace WebApplication0.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
