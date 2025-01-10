@@ -2,22 +2,118 @@
     ViewData["Title"] = "Dashboard Epfundao";
 }
 
-<div class="container mt-5">
-    <div class="p-5 rounded-4 shadow-lg" style="background: linear-gradient(90deg, #F3E9FF, #E0FAF7);">
-     
-        <h2 class="text-center mb-4 fw-bold" style="color: #6A0DAD;">Bem-vindo ao Dashboard Epfundao</h2>
+<div class="container mt-4">
+    <!-- Botão de Terminar Sessão na parte superior -->
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-controller="Account" asp-action="Logout"
+           class="btn btn-danger rounded-pill fw-bold px-4 py-2"
+           style="background-color: #FF6F61; color: white; border: none; transition: background-color 0.3s ease;">
+            Terminar Sessão
+        </a>
+    </div>
 
-        <p class="text-center" style="color: #857A91; font-size: 1.1rem;">
-            Olá, <strong style="color: #4B0082;">@ViewBag.UserName</strong>
-            (<em style="color: #2ED9C3;">@ViewBag.UserEmail</em>)
+    <!-- Card principal com mensagem de boas-vindas -->
+    <div class="p-5 rounded-4 shadow-lg mb-5"
+         style="background: linear-gradient(45deg, #5E4B8B, #9DF2E4);">
+        <!-- Título -->
+        <h2 class="text-center mb-4 fw-bold"
+            style="color: #ffffff; font-family: 'Roboto', sans-serif;">
+            Bem-vindo ao Dashboard Epfundao
+        </h2>
+
+        <!-- Mensagem de boas-vindas -->
+        <p class="text-center"
+           style="color: #E0D4E3; font-size: 1.1rem; line-height: 1.6;">
+            Olá, <strong style="color: #ffffff;">@ViewBag.UserName</strong>
+            (<em style="color: #A2E0D1;">@ViewBag.UserEmail</em>)!<br>
+            Explore as ferramentas e informações da
+            <strong style="color: #ffffff;">Escola Profissional do Fundão</strong>.
         </p>
+    </div>
 
-        <div class="d-flex justify-content-center mt-4">
-            <a asp-controller="Account" asp-action="Logout" class="btn rounded-pill fw-bold px-4 py-2"
-               style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; border: none; transition: all 0.3s ease;">
-                Terminar Sessão
-            </a>
+    <!-- Painel de informações e atalhos -->
+    <div class="mt-5">
+        <div class="row g-4">
+            <!-- Card: Sobre a Escola -->
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 h-100 rounded-3">
+                    <div class="card-body text-center">
+                        <i class="fas fa-school fa-4x mb-3" style="color: #9DF2E4;"></i>
+                        <h5 class="card-title fw-bold" style="color: #4B0082;">Sobre a Escola</h5>
+                        <p class="card-text" style="font-size: 1rem; color: #6A4E7F;">
+                            Saiba mais sobre a missão, visão e valores da Escola Profissional do Fundão.
+                            Oferecemos formação técnica em áreas como Informática, Gestão e Turismo.
+                        </p>
+                        <a href="https://www.epfundao.edu.pt" target="_blank"
+                           class="btn btn-outline-light rounded-pill px-4 py-2">
+                            Visite o site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Cursos Disponíveis -->
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 h-100 rounded-3">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book-open fa-4x mb-3" style="color: #4B0082;"></i>
+                        <h5 class="card-title fw-bold" style="color: #9DF2E4;">Cursos Disponíveis</h5>
+                        <p class="card-text" style="font-size: 1rem; color: #6A4E7F;">
+                            Explore os cursos técnicos oferecidos, incluindo áreas como Programação, Marketing e Design Gráfico.
+                        </p>
+                        <a href="https://www.epfundao.edu.pt/cursos" target="_blank"
+                           class="btn btn-outline-light rounded-pill px-4 py-2">
+                            Ver Cursos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Contactos -->
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 h-100 rounded-3">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope fa-4x mb-3" style="color: #FF6F61;"></i>
+                        <h5 class="card-title fw-bold" style="color: #9DF2E4;">Contacte-nos</h5>
+                        <p class="card-text" style="font-size: 1rem; color: #6A4E7F;">
+                            Tem dúvidas ou precisa de ajuda? Entre em contacto connosco por e-mail ou telefone.
+                        </p>
+                        <a href="https://www.epfundao.edu.pt/contactos" target="_blank"
+                           class="btn btn-outline-light rounded-pill px-4 py-2">
+                            Fale Connosco
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de links úteis -->
+        <div class="mt-5">
+            <h3 class="text-center fw-bold" style="color: #4B0082; font-family: 'Roboto', sans-serif;">
+                Links Úteis
+            </h3>
+            <div class="row text-center">
+                <div class="col-md-3 mb-3">
+                    <a href="https://www.epfundao.edu.pt/noticias" class="btn btn-outline-info w-100 py-3 rounded-3">
+                        <i class="fas fa-newspaper"></i> Notícias
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="https://www.epfundao.edu.pt/alunos" class="btn btn-outline-info w-100 py-3 rounded-3">
+                        <i class="fas fa-user-graduate"></i> Área do Aluno
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="https://www.epfundao.edu.pt/eventos" class="btn btn-outline-info w-100 py-3 rounded-3">
+                        <i class="fas fa-calendar-alt"></i> Eventos
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="https://www.epfundao.edu.pt/parceiros" class="btn btn-outline-info w-100 py-3 rounded-3">
+                        <i class="fas fa-handshake"></i> Parceiros
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
