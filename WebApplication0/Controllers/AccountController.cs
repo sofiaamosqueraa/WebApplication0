@@ -50,14 +50,14 @@ public class AccountController : Controller
                 return RedirectToAction("ListUsers");
             }
 
-           
+
             if (model.Email.EndsWith("@pontual.pt"))
             {
                 return RedirectToAction("DashboardPontual");
             }
             else if (model.Email.EndsWith("@epfundao.edu.pt"))
             {
-                return RedirectToAction("DashboardEpfundao");
+                return RedirectToAction("Dashboardescola");
             }
             else if (model.Email.EndsWith("@gmail.com"))
             {
@@ -95,7 +95,7 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
-    public IActionResult DashboardEpfundao()
+    public IActionResult Dashboardescola()
     {
         if (HttpContext.Session.GetString("UserEmail") != null)
         {
@@ -149,4 +149,3 @@ public class AccountController : Controller
 
 
 }
-
