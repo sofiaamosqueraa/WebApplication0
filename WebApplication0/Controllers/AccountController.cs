@@ -12,7 +12,12 @@ public class AccountController : Controller
         _context = context;
     }
 
-    public IActionResult Register() => View();
+
+    public IActionResult Register()
+    {
+        ViewBag.Companies = _context.Companies.ToList();
+        return View();
+    }
 
     [HttpPost]
     public IActionResult Register(User user)
@@ -23,6 +28,7 @@ public class AccountController : Controller
             _context.SaveChanges();
             return RedirectToAction("Login");
         }
+        ViewBag.Companies = _context.Companies.ToList();
         return View(user);
     }
 

@@ -13,18 +13,25 @@
 
     <form asp-action="Register" class="p-4 rounded-4 shadow-sm mx-auto" style="max-width: 500px; background: linear-gradient(90deg, #F3E9FF, #E0FAF7);">
         <div class="mb-3">
-            <label class="form-label fw-bold" style="color: #4B0082;">Nombre</label>
+            <label class="form-label fw-bold" style="color: #4B0082;">Nome</label>
             <input asp-for="Name" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" />
         </div>
-                     
+
         <div class="mb-3">
             <label class="form-label fw-bold" style="color: #4B0082;">Email</label>
             <input asp-for="Email" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" />
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-bold" style="color: #4B0082;">Contraseña</label>
+            <label class="form-label fw-bold" style="color: #4B0082;">Senha</label>
             <input asp-for="Password" type="password" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold" style="color: #4B0082;">Empresa</label>
+            <select asp-for="CompanyId" class="form-control border-0 rounded-pill" style="background-color: #F9F6FF;" asp-items="@(new SelectList(ViewBag.Companies, "Id", "Name"))">
+                <option value="">Selecione uma empresa</option>
+            </select>
         </div>
 
         <button type="submit" class="btn w-100 rounded-pill fw-bold"

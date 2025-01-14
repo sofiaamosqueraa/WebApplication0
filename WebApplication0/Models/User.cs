@@ -6,6 +6,8 @@
         public required string Name { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
-        public bool IsAdmin { get; set; } 
+        public bool IsAdmin { get; set; }
+        public int? CompanyId { get; set; }
+        public Company? Company { get; set; }
     }
 }
