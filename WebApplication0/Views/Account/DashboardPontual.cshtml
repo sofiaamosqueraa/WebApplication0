@@ -2,182 +2,182 @@
     ViewData["Title"] = "Dashboard Pontual";
 }
 
-<div class="container mt-5">
+<div class="container-fluid mt-5">
  
     <section id="header"
              class="d-flex justify-content-between align-items-center p-3"
              style="background-color: #6A1B9A; color: #FFFFFF; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0px 2px 5px rgba(0,0,0,0.1);">
-        <h1 style="margin: 0; font-size: 1.5rem; flex-grow: 1; text-align: center;">Dashboard Pontual</h1>
+        <h1 class="m-0 text-center fs-4 flex-grow-1 d-none d-md-block">Dashboard Pontual</h1>
         <a asp-controller="Account" asp-action="Logout" class="btn btn-sm"
            style="background-color: #FF4081; color: #FFFFFF; border-radius: 5px; font-weight: bold;">
             Terminar Sessão
         </a>
     </section>
 
-
-    <section id="welcome" class="vh-100 d-flex flex-column justify-content-center align-items-center text-center"
+    <section id="welcome" class="min-vh-100 d-flex flex-column justify-content-center align-items-center text-center"
              style="background: #E0F7FA; color: #6A1B9A; width: 100%;">
-        <h1 style="font-size: 4rem; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+        <h1 class="display-4 fw-bold text-shadow-sm">
             Bem-vindo à Pontual Solutions.
         </h1>
-        <p style="font-size: 1.5rem; max-width: 800px; margin-top: 1rem; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);">
+        <p class="fs-5 max-w-800 mt-3 text-shadow-sm">
             Mais de 30 anos impulsionando negócios com tecnologia na Península Ibérica.
         </p>
         <a href="#mission" class="btn btn-lg mt-4"
-           style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem; font-size: 1.2rem;
-                  transition: all 0.3s ease; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);">
-            Saiba Mais                             
+           style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem; font-size: 1.2rem;">
+            Saiba Mais
         </a>
     </section>
 
   
-    <section id="mission" class="d-flex flex-column justify-content-center align-items-center text-center py-5"
+    <section id="mission" class="py-5 text-center"
              style="background: linear-gradient(135deg, #FFFFFF, #E0F7FA); color: #333333;">
-        <h2 style="font-size: 2.8rem; color: #6A1B9A; font-weight: bold;">Missão e Valores</h2>
-        <div style="width: 80px; height: 4px; background: #FF4081; margin: 1rem auto;"></div>
-        <p style="max-width: 700px; margin: 2rem auto; font-size: 1.2rem; line-height: 1.8;">
-            Fornecemos soluções tecnológicas inovadoras, seguras e personalizadas para transformar negócios. Nossa missão é capacitar empresas a atingir novos níveis de eficiência e sucesso no mercado competitivo.
-        </p>
+        <div class="container">
+            <h2 class="fs-2 fw-bold text-primary">Missão e Valores</h2>
+            <div class="mx-auto my-3" style="width: 80px; height: 4px; background: #FF4081;"></div>
+            <p class="fs-6 lh-lg mx-auto max-w-700">
+                Fornecemos soluções tecnológicas inovadoras, seguras e personalizadas para transformar negócios. Nossa missão é capacitar empresas a atingir novos níveis de eficiência e sucesso no mercado competitivo.
+            </p>
 
-    
-        <div class="row mt-5 text-start w-100 px-3">
-            <div class="col-md-4">
-                <div class="d-flex align-items-start mb-3">
-                    <i class="bi bi-lightbulb" style="font-size: 2rem; color: #FF4081; margin-right: 1rem;"></i>
-                    <div>
-                        <h5 style="color: #6A1B9A; font-weight: bold;">Inovação</h5>
-                        <p style="font-size: 1rem;">Desenvolvimento contínuo de soluções modernas para atender às demandas do mercado.</p>
+
+            <div class="row mt-5 g-4">
+                <div class="col-12 col-md-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="bi bi-lightbulb text-danger fs-1 me-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-primary">Inovação</h5>
+                            <p class="fs-6">Desenvolvimento contínuo de soluções modernas para atender às demandas do mercado.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="d-flex align-items-start mb-3">
-                    <i class="bi bi-shield-lock" style="font-size: 2rem; color: #FF4081; margin-right: 1rem;"></i>
-                    <div>
-                        <h5 style="color: #6A1B9A; font-weight: bold;">Segurança</h5>
-                        <p style="font-size: 1rem;">Proteção de dados e infraestrutura crítica para garantir a tranquilidade do cliente.</p>
+                <div class="col-12 col-md-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="bi bi-shield-lock text-danger fs-1 me-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-primary">Segurança</h5>
+                            <p class="fs-6">Proteção de dados e infraestrutura crítica para garantir a tranquilidade do cliente.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="d-flex align-items-start mb-3">
-                    <i class="bi bi-people" style="font-size: 2rem; color: #FF4081; margin-right: 1rem;"></i>
-                    <div>
-                        <h5 style="color: #6A1B9A; font-weight: bold;">Personalização</h5>
-                        <p style="font-size: 1rem;">Soluções adaptadas para atender às necessidades exclusivas de cada cliente.</p>
+                <div class="col-12 col-md-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="bi bi-people text-danger fs-1 me-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-primary">Personalização</h5>
+                            <p class="fs-6">Soluções adaptadas para atender às necessidades exclusivas de cada cliente.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <a href="#services" class="btn btn-lg mt-5"
-           style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem; font-size: 1.2rem; transition: all 0.3s ease;">
+        <a href="#services" class="btn btn-lg mt-4"
+           style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem;">
             Nossos Serviços
         </a>
     </section>
 
- 
-    <section id="services" class="vh-100 d-flex flex-column justify-content-center align-items-center" style="background-color: #E0F7FA; color: #333333;">
-        <h2 style="font-size: 2.5rem; color: #6A1B9A; font-weight: bold;">Nossos Serviços</h2>
-        <div style="width: 100px; height: 4px; background-color: #FF4081; margin-bottom: 1.5rem; border-radius: 2px;"></div>
-        <p style="max-width: 700px; text-align: center; font-size: 1.2rem;">
-            Oferecemos uma ampla gama de soluções tecnológicas para atender às diversas necessidades de sua empresa, garantindo inovação, segurança e eficiência.
-        </p>
-        <div class="row justify-content-center w-100 px-3">
-           
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-gear" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">ERP Systems</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Soluções robustas e modulares para gestão empresarial, integrando finanças, logística e produção.
-                    </p>
+    <section id="services" class="py-5 text-center" style="background-color: #E0F7FA; color: #333333;">
+        <div class="container">
+            <h2 class="fs-2 fw-bold text-primary">Nossos Serviços</h2>
+            <div class="mx-auto mb-4" style="width: 100px; height: 4px; background: #FF4081; border-radius: 2px;"></div>
+            <p class="fs-6 mx-auto" style="max-width: 700px;">
+                Oferecemos uma ampla gama de soluções tecnológicas para atender às diversas necessidades de sua empresa, garantindo inovação, segurança e eficiência.
+            </p>
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-gear text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">ERP Systems</h5>
+                            <p class="card-text">Soluções robustas e modulares para gestão empresarial, integrando finanças, logística e produção.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-people text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">Customer Experience</h5>
+                            <p class="card-text">Ferramentas de CRM para melhorar o relacionamento com clientes e automação de jornadas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-bar-chart-line text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">Data Management & Automation</h5>
+                            <p class="card-text">Relatórios de business intelligence e automação de processos para maior eficiência.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-lock text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">Security & Managed Services</h5>
+                            <p class="card-text">Soluções de cibersegurança, proteção de dados e migração para a Cloud.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-lightbulb text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">Innovation & Transformation</h5>
+                            <p class="card-text">Digitalização de negócios e soluções inovadoras para aceleração digital.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-building text-danger fs-1 mb-3"></i>
+                            <h5 class="card-title fw-bold text-primary">Sector Solutions</h5>
+                            <p class="card-text">Software personalizado para indústrias, logística e manutenção.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-           
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-people" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">Customer Experience</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Ferramentas de CRM para melhorar o relacionamento com clientes e automação de jornadas.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-bar-chart-line" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">Data Management & Automation</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Relatórios de business intelligence e automação de processos para maior eficiência.
-                    </p>
-                </div>
-            </div>
-          
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-shield-lock" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">Security & Managed Services</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Soluções de cibersegurança, proteção de dados e migração para a Cloud.
-                    </p>
-                </div>
-            </div>
-         
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-lightbulb" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">Innovation & Transformation</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Digitalização de negócios e soluções inovadoras para aceleração digital.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card shadow h-100" style="border: none; background: #FFFFFF; border-radius: 8px; padding: 20px; text-align: center;">
-                    <i class="bi bi-building" style="font-size: 2rem; color: #FF4081; margin-bottom: 1rem;"></i>
-                    <h5 class="card-title" style="color: #6A1B9A; font-weight: bold;">Sector Solutions</h5>
-                    <p class="card-text" style="font-size: 1rem;">
-                        Software personalizado para indústrias, logística e manutenção.
-                    </p>
-                </div>
-            </div>
+            <a href="#success" class="btn btn-lg mt-4"
+               style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem; font-size: 1.2rem; transition: all 0.3s ease;">
+                Clientes
+            </a>
         </div>
-        <a href="#success" class="btn btn-lg mt-4" style="background-color: #FF4081; color: #FFFFFF; border-radius: 50px; padding: 0.75rem 2rem; font-size: 1.2rem; transition: all 0.3s ease;">
-            Clientes
-        </a>
     </section>
 
-    <section id="success" class="vh-100 d-flex flex-column justify-content-center align-items-center" style="background: linear-gradient(135deg, #FFFFFF, #E0F7FA); color: #333333; padding: 2rem;">
-        <h2 style="font-size: 2.5rem; color: #6A1B9A; font-weight: bold;">Clientes e Casos de Sucesso</h2>
-        <div style="width: 100px; height: 4px; background-color: #FF4081; margin-bottom: 1.5rem; border-radius: 2px;"></div>
-        <p style="max-width: 700px; text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
-            Atendemos empresas de pequeno, médio e grande porte, entregando resultados como economia de custos operacionais e aumento da eficiência.
-        </p>
-        <div style="max-width: 700px; width: 100%; padding: 20px; background-color: #FFFFFF; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px;">
-            <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 1rem; line-height: 1.8;">
-                <li style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                    <i class="bi bi-cart-check" style="font-size: 1.5rem; color: #FF4081; margin-right: 0.75rem;"></i>
-                    <span>
-                        <strong style="color: #6A1B9A;">Setor de Varejo:</strong> Aumento de 25% na eficiência logística em 12 meses.
-                    </span>
-                </li>
-                <li style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                    <i class="bi bi-building" style="font-size: 1.5rem; color: #FF4081; margin-right: 0.75rem;"></i>
-                    <span>
-                        <strong style="color: #6A1B9A;">Indústrias:</strong> Redução de custos operacionais em 15% através de automação.
-                    </span>
-                </li>
-                <li style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                    <i class="bi bi-shield-lock" style="font-size: 1.5rem; color: #FF4081; margin-right: 0.75rem;"></i>
-                    <span>
-                        <strong style="color: #6A1B9A;">Setor Financeiro:</strong> Melhorias na proteção de dados e conformidade com regulamentações.
-                    </span>
-                </li>
-            </ul>
+    <section id="success" class="py-5 d-flex flex-column justify-content-center align-items-center"
+             style="background: linear-gradient(135deg, #FFFFFF, #E0F7FA); color: #333333;">
+        <div class="container text-center">
+            <h2 class="fs-2 fw-bold" style="color: #6A1B9A;">Clientes e Casos de Sucesso</h2>
+            <div class="mx-auto mb-4" style="width: 100px; height: 4px; background-color: #FF4081; border-radius: 2px;"></div>
+            <p class="fs-5 mx-auto" style="max-width: 700px;">
+                Atendemos empresas de pequeno, médio e grande porte, entregando resultados como economia de custos operacionais e aumento da eficiência.
+            </p>
+            <div class="card mx-auto p-4" style="max-width: 700px; background-color: #FFFFFF; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                <ul class="list-unstyled">
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="bi bi-cart-check text-danger fs-4 me-3"></i>
+                        <span>
+                            <strong class="text-primary">Setor de Varejo:</strong> Aumento de 25% na eficiência logística em 12 meses.
+                        </span>
+                    </li>
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="bi bi-building text-danger fs-4 me-3"></i>
+                        <span>
+                            <strong class="text-primary">Indústrias:</strong> Redução de custos operacionais em 15% através de automação.
+                        </span>
+                    </li>
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="bi bi-shield-lock text-danger fs-4 me-3"></i>
+                        <span>
+                            <strong class="text-primary">Setor Financeiro:</strong> Melhorias na proteção de dados e conformidade com regulamentações.
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </section>
 </div>
+
 

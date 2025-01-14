@@ -11,8 +11,8 @@ using WebApplication0.Data;
 namespace WebApplication0.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250109114040_AddIsAdminColumn")]
-    partial class AddIsAdminColumn
+    [Migration("20250113121259_SyncDatabase")]
+    partial class SyncDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

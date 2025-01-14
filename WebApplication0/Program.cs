@@ -48,19 +48,19 @@ public static class SeedData
         using (var context = new ApplicationDbContext(
             serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
         {
-   
+
             if (context.Users.Any(u => u.IsAdmin))
             {
-                return;   
+                return;
             }
 
-         
+
             context.Users.AddRange(
                 new User
                 {
                     Name = "Admin",
                     Email = "admin@pontual.pt",
-                    Password = "admin123", 
+                    Password = "admin123",
                     IsAdmin = true
                 }
             );
