@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public required string Name { get; set; }
         public required string Address { get; set; }
-        public List<User> Users { get; set; } = new();
+        public List<UserCompany> UserCompanies { get; set; } = new();
     }
 }

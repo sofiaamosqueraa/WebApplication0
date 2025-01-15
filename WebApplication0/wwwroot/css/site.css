@@ -20,3 +20,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Remover o estilo cinza padrão do navegador no <select> */
+select option:checked {
+    background-color: #ffffff !important; /* Fundo branco */
+    color: #000000 !important; /* Texto preto */
+}
+
+/* Estilo para o próprio campo select */
+select {
+    color: #000000; /* Texto preto */
+    border: 1px solid #6A0DAD; /* Borda roxa */
+    border-radius: 4px; /* Cantos arredondados */
+    padding: 5px;
+}

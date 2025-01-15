@@ -2,6 +2,7 @@
 using WebApplication0.Data;
 using WebApplication0.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 public class AccountController : Controller
 {
@@ -11,7 +12,6 @@ public class AccountController : Controller
     {
         _context = context;
     }
-
 
     public IActionResult Register()
     {
@@ -56,20 +56,6 @@ public class AccountController : Controller
                 return RedirectToAction("ListUsers");
             }
 
-
-            if (model.Email.EndsWith("@pontual.pt"))
-            {
-                return RedirectToAction("DashboardPontual");
-            }
-            else if (model.Email.EndsWith("@epfundao.edu.pt"))
-            {
-                return RedirectToAction("Dashboardescola");
-            }
-            else if (model.Email.EndsWith("@gmail.com"))
-            {
-                return RedirectToAction("Dashboard");
-            }
-
             return RedirectToAction("Dashboard");
         }
 
@@ -83,35 +69,39 @@ public class AccountController : Controller
         {
             ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
+
+            var userEmail = ViewBag.UserEmail as string;
+
+            var user = _context.Users
+                .Include(u => u.UserCompanies)
+                .ThenInclude(uc => uc.Company)
+                .FirstOrDefault(u => u.Email == userEmail);
+
+            ViewBag.Companies = user?.UserCompanies.Select(uc => uc.Company).ToList();
             return View();
         }
 
         return RedirectToAction("Login");
     }
 
-    public IActionResult DashboardPontual()
+
+    public IActionResult InitializeCompanies()
     {
-        if (HttpContext.Session.GetString("UserEmail") != null)
-        {
-            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
-            ViewBag.UserName = HttpContext.Session.GetString("UserName");
-            return View();
-        }
-
-        return RedirectToAction("Login");
-    }
-
-    public IActionResult Dashboardescola()
+        var companies = new List<Company>
     {
-        if (HttpContext.Session.GetString("UserEmail") != null)
-        {
-            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
-            ViewBag.UserName = HttpContext.Session.GetString("UserName");
-            return View();
-        }
+        new Company { Name = "Lusocargo", Address = "Endereço 1" },
+        new Company { Name = "Infraspeak", Address = "Endereço 2" },
+        new Company { Name = "Corkart", Address = "Endereço 3" },
+        new Company { Name = "BSK Medical", Address = "Endereço 4" },
+        new Company { Name = "Nucase grupo", Address = "Endereço 5" }
+    };
 
-        return RedirectToAction("Login");
+        _context.Companies.AddRange(companies);
+        _context.SaveChanges();
+
+        return Ok("Empresas inicializadas com sucesso.");
     }
+
     [HttpGet]
     public IActionResult ListUsers()
     {
@@ -127,12 +117,47 @@ public class AccountController : Controller
             return Unauthorized();
         }
 
-        var users = _context.Users.OrderBy(u => u.Id).ToList();
+        // Carregar os usuários com suas empresas associadas
+        var users = _context.Users
+            .Include(u => u.UserCompanies)
+            .ThenInclude(uc => uc.Company)
+            .OrderBy(u => u.Id)
+            .ToList();
+
         ViewBag.TotalUsers = users.Count;
         ViewBag.AdminUsers = users.Count(u => u.IsAdmin);
+        ViewBag.Companies = _context.Companies.ToList();
 
         return View(users);
     }
+
+
+    [HttpPost]
+    public IActionResult AssignCompanies(int userId, List<int> companyIds)
+    {
+        var user = _context.Users.Include(u => u.UserCompanies).FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        // Remove as empresas associadas ao usuário
+        user.UserCompanies.Clear();
+
+        // Adiciona as empresas selecionadas
+        foreach (var companyId in companyIds)
+        {
+            var company = _context.Companies.Find(companyId);
+            if (company != null)
+            {
+                user.UserCompanies.Add(new UserCompany { UserId = userId, User = user, CompanyId = companyId, Company = company });
+            }
+        }
+
+        _context.SaveChanges();
+        return RedirectToAction("ListUsers");
+    }
+
 
     [HttpPost]
     public IActionResult DeleteUser(int id)
@@ -151,7 +176,4 @@ public class AccountController : Controller
         HttpContext.Session.Clear();
         return RedirectToAction("Index", "Home");
     }
-
-
-
 }
