@@ -1,0 +1,26 @@
+﻿<h2>Dashboard da Corkart</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informações da Corkart</h5>
+                <p class="card-text">Nome: @ViewBag.Company.Name</p>
+                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
+                <p class="card-text">Especialidade: Produtos de Cortiça</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Estatísticas de Produção</h5>
+                <p>Produção mensal: 10.000 unidades</p>
+                <p>Exportações: 75% da produção</p>
+                <p>Novos designs lançados: 5</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>

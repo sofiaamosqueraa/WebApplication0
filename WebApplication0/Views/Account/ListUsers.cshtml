@@ -8,6 +8,13 @@
     }
 }
 
+<div class="d-flex justify-content-end mb-3">
+    <a asp-controller="Account" asp-action="Logout" class="btn btn-sm"
+       style="background-color: #FF4081; color: #FFFFFF; border-radius: 5px; font-weight: bold;">
+        Terminar Sessão
+    </a>
+</div>
+
 <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle shadow-sm mt-4" style="background: linear-gradient(90deg, #F3E9FF, #E0FAF7);">
         <thead class="text-white" style="background: linear-gradient(90deg, #6A0DAD, #2ED9C3);">
@@ -27,23 +34,20 @@
                     <td class="text-center fw-bold text-dark">@user.Name</td>
                     <td class="text-center text-muted">@user.Email</td>
                     <td class="text-center">
-                        <!-- Exibe as empresas associadas ao usuário -->
-                        <div>
-                            @foreach (var userCompany in user.UserCompanies)
+                        <div id="user-@user.Id-companies">
+                            @foreach (var userCompany in user.UserCompanies ?? Enumerable.Empty<UserCompany>())
                             {
-                                <span class="badge bg-primary">@userCompany.Company?.Name</span>
+                                <span class="badge bg-primary me-1">@(userCompany.Company?.Name ?? "N/A")</span>
                             }
                         </div>
 
                         <form asp-action="AssignCompanies" method="post">
                             <input type="hidden" name="userId" value="@user.Id" />
                             <div class="d-flex flex-column align-items-center">
-                                <!-- Botão de Modal -->
                                 <button type="button" class="btn btn-outline-primary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#companyModal_@user.Id">
                                     Gerir Empresas
                                 </button>
 
-                                <!-- Modal -->
                                 <div class="modal fade" id="companyModal_@user.Id" tabindex="-1" aria-labelledby="modalLabel_@user.Id" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -52,23 +56,20 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <select id="companySelect_@user.Id" name="companyIds" multiple class="form-select">
-                                                    @if (ViewBag.Companies != null)
+                                                @if (ViewBag.Companies != null)
+                                                {
+                                                    foreach (var company in ViewBag.Companies)
                                                     {
-                                                        foreach (var company in ViewBag.Companies)
-                                                        {
-                                                            var isSelected = user.UserCompanies.Any(uc => uc.CompanyId == company.Id);
-                                                            if (isSelected)
-                                                            {
-                                                                <option value="@company.Id" selected>@company.Name</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="@company.Id">@company.Name</option>
-                                                            }
-                                                        }
+                                                        var isChecked = user.UserCompanies?.Any(uc => uc.CompanyId == company.Id) ?? false;
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="companyIds" value="@company.Id" id="company_@(user.Id)_@(company.Id)" @(isChecked ? "checked" : "")>
+                                                            <label class="form-check-label" for="company_@(user.Id)_@(company.Id)">
+                                                                @company.Name
+                                                            </label>
+                                                        </div>
+
                                                     }
-                                                </select>
+                                                }
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -77,6 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </form>
                     </td>

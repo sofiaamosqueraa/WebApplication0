@@ -141,10 +141,8 @@ public class AccountController : Controller
             return NotFound();
         }
 
-        // Remove as empresas associadas ao usuário
         user.UserCompanies.Clear();
 
-        // Adiciona as empresas selecionadas
         foreach (var companyId in companyIds)
         {
             var company = _context.Companies.Find(companyId);
@@ -155,8 +153,39 @@ public class AccountController : Controller
         }
 
         _context.SaveChanges();
+        TempData["SuccessMessage"] = "Empresas atribuídas com sucesso.";
         return RedirectToAction("ListUsers");
     }
+
+    public IActionResult CompanyDashboard(int companyId)
+    {
+        var userEmail = HttpContext.Session.GetString("UserEmail");
+        if (userEmail == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var user = _context.Users
+            .Include(u => u.UserCompanies)
+            .ThenInclude(uc => uc.Company)
+            .FirstOrDefault(u => u.Email == userEmail);
+
+        var company = user?.UserCompanies
+            .FirstOrDefault(uc => uc.CompanyId == companyId)?.Company;
+
+        if (company == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Company = company;
+
+        // Redirecionar para o dashboard específico da empresa
+        return View($"CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard");
+
+    }
+
+
 
 
     [HttpPost]

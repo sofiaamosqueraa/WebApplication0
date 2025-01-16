@@ -1,0 +1,26 @@
+﻿<h2>Dashboard da Infraspeak</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informações da Infraspeak</h5>
+                <p class="card-text">Nome: @ViewBag.Company.Name</p>
+                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
+                <p class="card-text">Área de atuação: Manutenção e Gestão de Ativos</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Métricas de Desempenho</h5>
+                <p>Tickets resolvidos: 150</p>
+                <p>Tempo médio de resposta: 2.5 horas</p>
+                <p>Satisfação do cliente: 95%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>

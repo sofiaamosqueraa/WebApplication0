@@ -1,0 +1,26 @@
+﻿<h2>Dashboard da Nucase Grupo</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informações da Nucase Grupo</h5>
+                <p class="card-text">Nome: @ViewBag.Company.Name</p>
+                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
+                <p class="card-text">Área de atuação: Consultoria Empresarial</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Métricas de Negócio</h5>
+                <p>Clientes atendidos: 200</p>
+                <p>Projetos concluídos: 50</p>
+                <p>Crescimento anual: 15%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>

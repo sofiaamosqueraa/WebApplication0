@@ -2,21 +2,39 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h2>Bem-vindo, @ViewBag.UserName</h2>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center"
+     style="background: linear-gradient(135deg, #E6D1F2, #D3B8E8, #A8E5E2);">
+    <div class="row py-5 text-center">
+        <div class="col-12">
+            <h2 class="text-white mb-4 fw-bold">Bem-vindo, @ViewBag.UserName</h2>
+            <h3 class="text-light mb-5 fst-italic">Empresas Associadas</h3>
+        </div>
+    </div>
 
-<h3>Empresas Associadas</h3>
-@if (ViewBag.Companies != null && ViewBag.Companies.Count > 0)
-{
-    <ul>
-        @foreach (var company in ViewBag.Companies)
-        {
-            <li>@company.Name - @company.Address</li>
-        }
-    </ul>
-}
-else
-{
-    <p>Você não está associado a nenhuma empresa.</p>
-}
-
-
+    @if (ViewBag.Companies != null && ViewBag.Companies.Count > 0)
+    {
+        <div class="row justify-content-center">
+            @foreach (var company in ViewBag.Companies)
+            {
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <a href="@Url.Action("CompanyDashboard", "Account", new { companyId = company.Id })"
+                       class="btn btn-lg btn-block shadow-sm"
+                       style="background-color: #D3B8E8; color: #fff; border: none; border-radius: 50px; transition: transform 0.2s;">
+                        <i class="fas fa-building me-2"></i>@company.Name
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert text-center fw-bold"
+                     style="background-color: #A8E5E2; color: #4B0082; border: none;">
+                    <i class="fas fa-info-circle me-2"></i>Você não está associado a nenhuma empresa.
+                </div>
+            </div>
+        </div>
+    }
+</div>

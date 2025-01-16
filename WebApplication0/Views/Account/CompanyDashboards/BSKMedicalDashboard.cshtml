@@ -1,0 +1,26 @@
+﻿<h2>Dashboard da BSK Medical</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informações da BSK Medical</h5>
+                <p class="card-text">Nome: @ViewBag.Company.Name</p>
+                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
+                <p class="card-text">Setor: Equipamentos Médicos</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Indicadores de Desempenho</h5>
+                <p>Equipamentos vendidos: 500</p>
+                <p>Satisfação dos profissionais de saúde: 98%</p>
+                <p>Novos contratos hospitalares: 3</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>
