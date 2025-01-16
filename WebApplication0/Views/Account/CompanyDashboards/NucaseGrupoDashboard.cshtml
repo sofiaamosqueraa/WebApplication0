@@ -1,26 +1,97 @@
-﻿<h2>Dashboard da Nucase Grupo</h2>
+﻿@{
+    ViewData["Title"] = "Dashboard da Nucase Grupo";
+}
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Informações da Nucase Grupo</h5>
-                <p class="card-text">Nome: @ViewBag.Company.Name</p>
-                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
-                <p class="card-text">Área de atuação: Consultoria Empresarial</p>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center"
+     style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9, #A5D6A7);">
+    <div class="row py-5 text-center">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold" style="color: #1B5E20;">
+                Dashboard do <span style="color: #388E3C;">Grupo NUCASE</span>
+            </h1>
+            <h3 class="text-dark mb-5 fst-italic">Excelência em Consultoria Empresarial</h3>
+        </div>
+    </div>
+
+    <!-- Informação Principal -->
+    <div class="row g-4">
+        <!-- Introdução -->
+        <div class="col-md-6">
+            <div class="card shadow-sm" style="background-color: #E8F5E9;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #1B5E20;">Sobre o Grupo NUCASE</h5>
+                    <p class="card-text">Com mais de quatro décadas de experiência, o Grupo NUCASE apoia mais de 1500 clientes com soluções adaptadas às suas necessidades.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefícios -->
+        <div class="col-md-6">
+            <div class="card shadow-sm" style="background-color: #E8F5E9;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #1B5E20;">Áreas de Especialização</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-calculator me-2 text-success"></i>Contabilidade e Fiscalidade</li>
+                        <li><i class="fas fa-users me-2 text-info"></i>Gestão de Recursos Humanos</li>
+                        <li><i class="fas fa-clipboard-check me-2 text-warning"></i>Consultoria Empresarial</li>
+                        <li><i class="fas fa-handshake me-2 text-primary"></i>Gestão Administrativa</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Métricas de Negócio</h5>
-                <p>Clientes atendidos: 200</p>
-                <p>Projetos concluídos: 50</p>
-                <p>Crescimento anual: 15%</p>
+
+    <!-- Características y Métricas -->
+    <div class="row g-4 mt-4">
+        <!-- Sustentabilidade -->
+        <div class="col-md-6">
+            <div class="card shadow-sm" style="background-color: #E8F5E9;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #1B5E20;">Compromisso com a Excelência</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-certificate me-2 text-warning"></i>Certificação ISO 9001 e ISO 27001</li>
+                        <li><i class="fas fa-star me-2 text-success"></i>PME Líder e PME Excelência</li>
+                        <li><i class="fas fa-leaf me-2 text-info"></i>Soluções responsáveis e sustentáveis</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+
+        <!-- Métricas -->
+        <div class="col-md-6">
+            <div class="card shadow-sm" style="background-color: #E8F5E9;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #1B5E20;">Métricas de Negócio</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-users me-2 text-primary"></i>Clientes atendidos: <strong>1.500+</strong></li>
+                        <li><i class="fas fa-briefcase me-2 text-info"></i>Projetos concluídos: <strong>50</strong></li>
+                        <li><i class="fas fa-chart-line me-2 text-success"></i>Crescimento anual: <strong>15%</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- História e Propriedades -->
+    <div class="row g-4 mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm" style="background-color: #E8F5E9;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #1B5E20;">História e Valores</h5>
+                    <p class="card-text">
+                        <i class="fas fa-history me-2 text-success"></i>Desde 1978, o Grupo NUCASE trabalha com <strong>ética</strong>, <strong>rigor</strong> e <strong>inovação</strong>, promovendo soluções flexíveis e sustentáveis para os negócios dos seus clientes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão para retornar -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a href="@Url.Action("Dashboard", "Account")" class="btn btn-emerald btn-lg shadow-sm" style="background-color: #1B5E20; color: #FFF;">
+                <i class="fas fa-arrow-left me-2"></i>Voltar para Lista de Empresas
+            </a>
         </div>
     </div>
 </div>
-
-<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>

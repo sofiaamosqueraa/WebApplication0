@@ -117,7 +117,6 @@ public class AccountController : Controller
             return Unauthorized();
         }
 
-        // Carregar os usuários com suas empresas associadas
         var users = _context.Users
             .Include(u => u.UserCompanies)
             .ThenInclude(uc => uc.Company)
@@ -180,7 +179,6 @@ public class AccountController : Controller
 
         ViewBag.Company = company;
 
-        // Redirecionar para o dashboard específico da empresa
         return View($"CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard");
 
     }

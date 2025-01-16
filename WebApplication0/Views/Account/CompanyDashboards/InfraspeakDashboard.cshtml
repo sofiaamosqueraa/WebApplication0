@@ -1,26 +1,87 @@
-﻿<h2>Dashboard da Infraspeak</h2>
+﻿@{
+    ViewData["Title"] = "Dashboard da Infraspeak";
+}
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Informações da Infraspeak</h5>
-                <p class="card-text">Nome: @ViewBag.Company.Name</p>
-                <p class="card-text">Endereço: @ViewBag.Company.Address</p>
-                <p class="card-text">Área de atuação: Manutenção e Gestão de Ativos</p>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center"
+     style="background: linear-gradient(135deg, #E0ECF8, #B9DDF5, #A1CFE7);">
+    <div class="row py-5 text-center">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold" style="color: #004D91;">
+                Dashboard da <span style="color: #FF8303;">Infraspeak</span>
+            </h1>
+            <h3 class="text-light mb-5 fst-italic">Soluções Inteligentes para Facility Management</h3>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Bem-vindo à Infraspeak</h5>
+                    <p class="card-text">Infraspeak oferece soluções avançadas para gestão de manutenção e ativos, garantindo inovação e eficiência operacional em diversos setores.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Benefícios Principais</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle me-2 text-success"></i>Controle total das operações</li>
+                        <li><i class="fas fa-balance-scale me-2 text-info"></i>Cumprimento normativo</li>
+                        <li><i class="fas fa-chart-line me-2 text-warning"></i>Aumento da produtividade</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Métricas de Desempenho</h5>
-                <p>Tickets resolvidos: 150</p>
-                <p>Tempo médio de resposta: 2.5 horas</p>
-                <p>Satisfação do cliente: 95%</p>
+
+    <div class="row g-4 mt-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Plataforma IMMP</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-cogs me-2 text-success"></i>Mantenimiento basado em uso</li>
+                        <li><i class="fas fa-clock me-2 text-danger"></i>Reducción del MTTR</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Métricas de Desempenho</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-tasks me-2 text-success"></i>Tickets resolvidos: <strong>150</strong></li>
+                        <li><i class="fas fa-clock me-2 text-warning"></i>Tempo médio de resposta: <strong>2.5 horas</strong></li>
+                        <li><i class="fas fa-smile me-2 text-info"></i>Satisfação do cliente: <strong>95%</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Setores Atendidos</h5>
+                    <p class="card-text">
+                        <i class="fas fa-building me-2 text-warning"></i>Hotelaria, Elevadores, Facility Management, Saúde, Retail, Instituições Educativas, entre outros.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary btn-lg shadow-sm">
+                <i class="fas fa-arrow-left me-2"></i>Voltar para Lista de Empresas
+            </a>
         </div>
     </div>
 </div>
-
-<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary mt-3">Voltar para Lista de Empresas</a>
