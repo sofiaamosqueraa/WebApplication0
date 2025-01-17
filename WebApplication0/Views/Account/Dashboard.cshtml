@@ -2,49 +2,74 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center"
-     style="background: linear-gradient(135deg, #E6D1F2, #D3B8E8, #A8E5E2);">
-    <div class="row py-5 text-center">
-        <div class="col-12">
-            <h1 class="display-4 fw-bold" style="color: #6A0DAD;">
-                Bem-vindo ao
-                <span style="color: #2ED9C3;">WebApplication0</span>
-            </h1>
-            <h3 class="text-light mb-5 fst-italic">Empresas Associadas</h3>
-        </div>
-    </div>
-    <div class="d-flex justify-content-end mb-3">
-        <a asp-controller="Account" asp-action="Logout" class="btn btn-sm"
-           style="background-color: #FF4081; color: #FFFFFF; border-radius: 5px; font-weight: bold;">
-            Terminar Sessão
-        </a>
-    </div>
-    @if (ViewBag.Companies != null && ViewBag.Companies.Count > 0)
-    {
-        <div class="row justify-content-center">
-            @foreach (var company in ViewBag.Companies)
-            {
-                <div class="col-md-4 col-lg-3 mb-4">
-                    <a href="@Url.Action("CompanyDashboard", "Account", new { companyId = company.Id })"
-                       class="btn btn-lg btn-block shadow-sm"
-                       style="background-color: #E1C9E5; color: #6A0DAD; border: 2px solid #6A0DAD; border-radius: 50px; transition: transform 0.2s;">
-                        <i class="fas fa-building me-2"></i>@company.Name
-                    </a>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center bg-light">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="bg-white rounded-4 shadow-lg p-4 p-md-5">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
+                    <div class="order-2 order-md-1 text-center text-md-start mt-4 mt-md-0">
+                        <h2 class="h4 mb-1" style="color: #6A0DAD;">
+                            <i class="fas fa-user-circle me-2" style="color: #20B2AA;"></i>
+                            <strong>@ViewBag.UserName</strong>
+                        </h2>
+                        <p class="mb-0" style="color: #48D1CC;">Painel de Controle</p>
+                    </div>
+                    <div class="order-1 order-md-2">
+                        <a asp-controller="Account" asp-action="Logout"
+                           class="btn rounded-pill px-4 btn-sm" style="border: 2px solid #40E0D0; color: #6A0DAD;">
+                            <i class="fas fa-sign-out-alt me-2"></i>Terminar Sessão
+                        </a>
+                    </div>
                 </div>
-            }
 
-
-        </div>
-    }
-    else
-    {
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="alert text-center fw-bold"
-                     style="background-color: #A8E5E2; color: #4B0082; border: none;">
-                    <i class="fas fa-info-circle me-2"></i>Você não está associado a nenhuma empresa.
+                <div class="text-center mb-5 py-4 rounded-4" style="background: linear-gradient(145deg, #F0FFFF, #E5FBFF);">
+                    <h1 class="display-5 fw-bold mb-3" style="color: #6A0DAD;">
+                        Bem-vindo 
+                    </h1>
+                    <h3 class="h4 fw-light" style="color: #20B2AA;">Empresas Associadas</h3>
                 </div>
+
+                @if (ViewBag.Companies != null && ViewBag.Companies.Count > 0)
+                {
+                    <div class="row justify-content-center g-4">
+                        @foreach (var company in ViewBag.Companies)
+                        {
+                            <div class="col-sm-6 col-md-4 col-xl-3">
+                                <div class="card h-100 border-0 shadow-sm hover-shadow">
+                                    <a href="@Url.Action("CompanyDashboard", "Account", new { companyId = company.Id })"
+                                       class="card-body p-4 text-decoration-none">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div class="p-3 rounded-circle mb-3" style="background-color: #E0FFFF;">
+                                                <i class="fas fa-building fa-2x" style="color: #48D1CC;"></i>
+                                            </div>
+                                            <h5 class="card-title mb-0 text-center fw-bold" style="color: #6A0DAD;">
+                                                @company.Name
+                                            </h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="card border-0" style="background: linear-gradient(145deg, #E0FFFF, #B0E0E6);">
+                                <div class="card-body text-center p-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-info-circle fa-3x" style="color: #6A0DAD; opacity: 0.7;"></i>
+                                    </div>
+                                    <h4 class="mb-0" style="color: #20B2AA;">
+                                        Você não está associado a nenhuma empresa.
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-    }
+    </div>
 </div>

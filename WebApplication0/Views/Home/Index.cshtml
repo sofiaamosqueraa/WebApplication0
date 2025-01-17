@@ -4,45 +4,77 @@
 
 <div class="container mt-5">
     <header class="text-center mb-5">
-        <h1 class="display-4 fw-bold" style="color: #6A0DAD;">Bem-vindo ao <span style="color: #2ED9C3;">WebApplication0</span></h1>
-        <p class="lead" style="color: #B0A8B9;">Gerencie os seus utilizadores de forma simples e eficiente com uma interface moderna e intuitiva.</p>
+        <h1 class="display-4 fw-bold" style="color: #6A0DAD;">
+            Bem-vindo ao
+            <span style="color: #20B2AA;">WebApplication0</span>
+        </h1>
+        <p class="lead" style="color: #48D1CC;">
+            Gerencie os seus utilizadores de forma simples e eficiente com uma interface moderna e intuitiva.
+        </p>
     </header>
 
     <div class="row g-4">
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm h-100 rounded-4" style="background-color: #F3F0FF;">
+            <div class="card border-0 shadow-sm h-100 rounded-4 card-hover"
+                 style="background: linear-gradient(145deg, #E0FFFF, #B0E0E6); transition: transform 0.3s;">
                 <div class="card-body text-center p-4">
                     <div class="mb-3">
-                        <i class="bi bi-person-plus-fill" style="color: #6A0DAD; font-size: 2.5rem;"></i>
+                        <i class="bi bi-person-plus-fill"
+                           style="color: #6A0DAD; font-size: 2.5rem; opacity: 0.9;"></i>
                     </div>
-                    <h2 class="h5 fw-bold" style="color: #4B0082;">Registar-se</h2>
-                    <p style="color: #857A91;">Crie uma conta para começar a utilizar os nossos serviços de forma rápida e segura.</p>
+                    <h2 class="h5 fw-bold" style="color: #6A0DAD;">Registar-se</h2>
+                    <p style="color: #20B2AA;">
+                        Crie uma conta para começar a utilizar os nossos serviços de forma rápida e segura.
+                    </p>
                     <a asp-controller="Account" asp-action="Register"
-                       class="btn w-100 rounded-pill fw-bold"
-                       style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; transition: all 0.3s ease;">
-                        Registar-se.
+                       class="btn w-100 rounded-pill fw-bold btn-hover"
+                       style="background: linear-gradient(90deg, #6A0DAD, #40E0D0);
+                              color: white;
+                              border: none;
+                              padding: 12px;
+                              transition: all 0.3s ease;
+                              box-shadow: 0 4px 15px rgba(106, 13, 173, 0.2);">
+                        Registar-se
                     </a>
                 </div>
             </div>
         </div>
 
-
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm h-100 rounded-4" style="background-color: #F3F0FF;">
+            <div class="card border-0 shadow-sm h-100 rounded-4 card-hover"
+                 style="background: linear-gradient(145deg, #E0FFFF, #B0E0E6); transition: transform 0.3s;">
                 <div class="card-body text-center p-4">
                     <div class="mb-3">
-                        <i class="bi bi-box-arrow-in-right" style="color: #6A0DAD; font-size: 2.5rem;"></i>
+                        <i class="bi bi-box-arrow-in-right"
+                           style="color: #6A0DAD; font-size: 2.5rem; opacity: 0.9;"></i>
                     </div>
-                    <h2 class="h5 fw-bold" style="color: #4B0082;">Iniciar Sessão</h2>
-                    <p style="color: #857A91;">Aceda à sua conta para explorar todos os recursos e gerir os seus dados de forma prática e segura.</p>
+                    <h2 class="h5 fw-bold" style="color: #6A0DAD;">Iniciar Sessão</h2>
+                    <p style="color: #20B2AA;">
+                        Aceda à sua conta para explorar todos os recursos e gerir os seus dados de forma prática e segura.
+                    </p>
                     <a asp-controller="Account" asp-action="Login"
-                       class="btn w-100 rounded-pill fw-bold"
-                       style="background: linear-gradient(90deg, #B19CD9, #9DF2E4); color: #6A0DAD; transition: all 0.3s ease;">
-                        Iniciar Sessão.
+                       class="btn w-100 rounded-pill fw-bold btn-hover"
+                       style="background: linear-gradient(90deg, #6A0DAD, #40E0D0);
+                              color: white;
+                              border: none;
+                              padding: 12px;
+                              transition: all 0.3s ease;
+                              box-shadow: 0 4px 15px rgba(106, 13, 173, 0.2);">
+                        Iniciar Sessão
                     </a>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .card-hover:hover {
+        transform: translateY(-5px) !important;
+    }
+
+    .btn-hover:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(106, 13, 173, 0.3) !important;
+    }
+</style>

@@ -1,44 +1,70 @@
 ﻿@model WebApplication0.Models.User
 
-@{
-    ViewData["Title"] = "Register";
-}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold" style="color: #6A0DAD;">Registrar Conta</h2>
 
-<h2>Register</h2>
+    <form asp-action="Register"
+          class="p-4 p-md-5 rounded-4 shadow-sm mx-auto bg-white"
+          style="max-width: 500px; background: linear-gradient(145deg, #E0FFFF, #B0E0E6) !important;">
 
-<form asp-action="Register">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="IsAdmin" class="control-label"></label>
-        <input asp-for="IsAdmin" class="form-control" />
-        <span asp-validation-for="IsAdmin" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Register" class="btn btn-primary" />
-    </div>
-</form>
+        <div class="mb-4">
+            <label asp-for="Name" class="form-label fw-bold" style="color: #6A0DAD;">Nome</label>
+            <input asp-for="Name"
+                   class="form-control form-control-lg border-0 rounded-pill shadow-sm"
+                   style="background-color: rgba(255, 255, 255, 0.9); padding: 12px 20px;" />
+            <span asp-validation-for="Name" class="text-danger mt-1 fw-semibold"></span>
+        </div>
 
-<div>
-    <a asp-action="Login">Back to Login</a>
+        <div class="mb-4">
+            <label asp-for="Email" class="form-label fw-bold" style="color: #6A0DAD;">Email</label>
+            <input asp-for="Email"
+                   class="form-control form-control-lg border-0 rounded-pill shadow-sm"
+                   style="background-color: rgba(255, 255, 255, 0.9); padding: 12px 20px;" />
+            <span asp-validation-for="Email" class="text-danger mt-1 fw-semibold"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Password" class="form-label fw-bold" style="color: #6A0DAD;">Senha</label>
+            <input asp-for="Password"
+                   type="password"
+                   class="form-control form-control-lg border-0 rounded-pill shadow-sm"
+                   style="background-color: rgba(255, 255, 255, 0.9); padding: 12px 20px;" />
+            <span asp-validation-for="Password" class="text-danger mt-1 fw-semibold"></span>
+        </div>
+
+        <button type="submit"
+                class="btn btn-lg w-100 rounded-pill fw-bold mb-3"
+                style="background: linear-gradient(90deg, #6A0DAD, #40E0D0);
+                       color: white;
+                       border: none;
+                       padding: 12px 20px;">
+            Registrar
+        </button>
+
+        <div class="text-center">
+            <a asp-action="Login"
+               class="text-decoration-none fw-bold"
+               style="color: #20B2AA;">
+                Voltar para Login
+            </a>
+        </div>
+    </form>
 </div>
+
+<style>
+    .form-control:focus {
+        border-color: #40E0D0;
+        box-shadow: 0 0 0 0.25rem rgba(64, 224, 208, 0.25);
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+</style>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
