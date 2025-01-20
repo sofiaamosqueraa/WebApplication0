@@ -3,6 +3,15 @@
 }
 
 <div class="container-fluid min-vh-100 d-flex flex-column justify-content-center bg-light">
+
+       @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @ViewBag.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
             <div class="bg-white rounded-4 shadow-lg p-4 p-md-5">
@@ -12,15 +21,57 @@
                             <i class="fas fa-user-circle me-2" style="color: #20B2AA;"></i>
                             <strong>@ViewBag.UserName</strong>
                         </h2>
-                        <p class="mb-0" style="color: #48D1CC;">Painel de Controle</p>
+                        <button class="btn rounded-pill px-4 btn-sm" style="border: 2px solid #20B2AA; color: #6A0DAD;"
+                                data-bs-toggle="modal" data-bs-target="#userProfileModal">
+                            <i class="fas fa-user-edit me-2"></i>Editar Perfil
+                        </button>
                     </div>
-                    <div class="order-1 order-md-2">
+                    <div class="order-1 order-md-2 d-flex">
                         <a asp-controller="Account" asp-action="Logout"
-                           class="btn rounded-pill px-4 btn-sm" style="border: 2px solid #40E0D0; color: #6A0DAD;">
+                           class="btn rounded-pill px-4 btn-sm me-2" style="border: 2px solid #40E0D0; color: #6A0DAD;">
                             <i class="fas fa-sign-out-alt me-2"></i>Terminar Sessão
                         </a>
                     </div>
                 </div>
+
+                <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content rounded-4 shadow-lg">
+                            <div class="modal-header" style="background-color: #E0FFFF;">
+                                <h5 class="modal-title" id="userProfileModalLabel" style="color: #6A0DAD;">Editar Perfil</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="userProfileForm" asp-controller="Account" asp-action="UpdateUserProfile" method="post">
+                                   
+                                    <input type="hidden" name="Id" value="@ViewBag.UserId" />
+
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label" style="color: #6A0DAD;">Nome</label>
+                                        <input type="text" class="form-control" id="name" name="Name" value="@ViewBag.UserName" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label" style="color: #6A0DAD;">Email</label>
+                                        <input type="email" class="form-control" id="email" name="Email" value="@ViewBag.UserEmail" required readonly />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="newPassword" class="form-label" style="color: #6A0DAD;">Nova Palavra-Passe (opcional)</label>
+                                        <input type="password" class="form-control" id="newPassword" name="NewPassword" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="background-color: #E0FFFF;">
+                                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" form="userProfileForm" class="btn btn-primary rounded-pill px-4" style="background-color: #20B2AA; border: none;">
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
                 <div class="text-center mb-5 py-4 rounded-4" style="background: linear-gradient(145deg, #F0FFFF, #E5FBFF);">
                     <h1 class="display-5 fw-bold mb-3" style="color: #6A0DAD;">

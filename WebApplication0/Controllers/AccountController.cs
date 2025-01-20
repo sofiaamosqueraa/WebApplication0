@@ -3,6 +3,8 @@ using WebApplication0.Data;
 using WebApplication0.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 public class AccountController : Controller
 {
@@ -77,12 +79,18 @@ public class AccountController : Controller
                 .ThenInclude(uc => uc.Company)
                 .FirstOrDefault(u => u.Email == userEmail);
 
-            ViewBag.Companies = user?.UserCompanies.Select(uc => uc.Company).ToList();
-            return View();
+            if (user != null)
+            {
+                // Asegúrate de pasar el Id del usuario a la vista
+                ViewBag.UserId = user.Id;
+                ViewBag.Companies = user?.UserCompanies.Select(uc => uc.Company).ToList();
+                return View();
+            }
         }
 
         return RedirectToAction("Login");
     }
+
 
 
     public IActionResult InitializeCompanies()
@@ -183,9 +191,6 @@ public class AccountController : Controller
 
     }
 
-
-
-
     [HttpPost]
     public IActionResult DeleteUser(int id)
     {
@@ -198,9 +203,34 @@ public class AccountController : Controller
         return RedirectToAction("ListUsers");
     }
 
+
+    public IActionResult UpdateUserProfile(int id, string name, string email, string newPassword)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+        if (user == null)
+        {
+            return NotFound("Usuário não encontrado.");
+        }
+
+        user.Name = name;
+
+        if (!string.IsNullOrWhiteSpace(newPassword))
+        {
+            user.Password = newPassword;
+        }
+
+        _context.Users.Update(user);
+        _context.SaveChanges();
+
+        TempData["SuccessMessage"] = "Perfil atualizado com sucesso!";
+        return RedirectToAction("Dashboard");
+    }
+
+
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();
         return RedirectToAction("Index", "Home");
     }
+
 }
