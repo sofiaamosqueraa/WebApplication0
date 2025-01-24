@@ -5,15 +5,19 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 public class AccountController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public AccountController(ApplicationDbContext context)
+    public AccountController(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
+
 
     public IActionResult Register()
     {
@@ -81,7 +85,7 @@ public class AccountController : Controller
 
             if (user != null)
             {
-                // Asegúrate de pasar el Id del usuario a la vista
+
                 ViewBag.UserId = user.Id;
                 ViewBag.Companies = user?.UserCompanies.Select(uc => uc.Company).ToList();
                 return View();
@@ -226,6 +230,127 @@ public class AccountController : Controller
         return RedirectToAction("Dashboard");
     }
 
+    public IActionResult ConvidarUsuario()
+    {
+        ViewBag.Empresas = _context.Companies.ToList();
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult ConvidarUsuario(string email, List<int> companyIds)
+    {
+        var usuarioExiste = _context.Users.Any(u => u.Email == email);
+        if (usuarioExiste)
+        {
+            TempData["Mensagem"] = "Este e-mail já está registado.";
+            return RedirectToAction("ConvidarUsuario");
+        }
+
+        var token = Guid.NewGuid().ToString();
+        var convite = new Invitation
+        {
+            Email = email,
+            Token = token,
+            EmpresasSelecionadas = string.Join(",", companyIds), 
+            DataCriacao = DateTime.Now 
+        };
+
+        _context.Invitations.Add(convite);
+        _context.SaveChanges();
+
+        foreach (var empresaId in companyIds)
+        {
+            var empresa = _context.Companies.Find(empresaId);
+            if (empresa != null)
+            {
+                _context.UserCompanies.Add(new UserCompany { CompanyId = empresaId });
+            }
+        }
+
+        _context.SaveChanges();
+
+        var resetUrl = $"https://localhost:7130/Account/AceitarConvite/{token}";
+        var emailService = new EmailService(_configuration);
+              
+        emailService.EnviarConvitePorEmail(email, token);
+
+        TempData["Mensagem"] = "Convite enviado com sucesso!";
+        TempData["ShowModal"] = "true";
+        TempData["Email"] = email;
+        TempData["Token"] = token;
+        return RedirectToAction("ConvidarUsuario");
+    }
+
+    [HttpPost]
+    public IActionResult AssociarEmpresas(string token, List<int> companyIds)
+    {
+        var convite = _context.Invitations.FirstOrDefault(i => i.Token == token);
+        if (convite != null)
+        {
+            convite.EmpresasSelecionadas = string.Join(",", companyIds);
+            _context.SaveChanges();
+            TempData["Mensagem"] = "Empresas associadas com sucesso!";
+        }
+        else
+        {
+            TempData["Mensagem"] = "Convite não encontrado.";
+        }
+        return RedirectToAction("ConvidarUsuario");
+    }
+
+
+    [HttpGet]
+    public IActionResult AceitarConvite(string token)
+    {
+        var convite = _context.Invitations.FirstOrDefault(i => i.Token == token);
+        if (convite == null || (DateTime.Now - convite.DataCriacao).TotalMinutes > 5)
+        {
+            TempData["MensagemErro"] = "Este convite é inválido ou expirou.";
+            return RedirectToAction("Erro", "Home");
+        }
+
+        ViewBag.Token = token;
+        return View();
+    }
+
+
+    [HttpPost]
+    public IActionResult AceitarConvite(string token, string name, string password)
+    {
+        var convite = _context.Invitations.FirstOrDefault(i => i.Token == token);
+        if (convite == null)
+        {
+            TempData["MensagemErro"] = "Este convite é inválido.";
+            return RedirectToAction("Erro", "Home");
+        }
+
+        var usuario = new User
+        {
+            Email = convite.Email,
+            Password = password,
+            Name = name
+        };
+
+        _context.Users.Add(usuario);
+        _context.SaveChanges();
+
+        var empresasIds = convite.EmpresasSelecionadas.Split(',').Select(int.Parse).ToList();
+        foreach (var empresaId in empresasIds)
+        {
+            var empresa = _context.Companies.Find(empresaId);
+            if (empresa != null)
+            {
+                usuario.UserCompanies.Add(new UserCompany { UserId = usuario.Id, CompanyId = empresaId });
+            }
+        }
+
+        _context.SaveChanges();
+        _context.Invitations.Remove(convite);
+        _context.SaveChanges();
+
+        TempData["MensagemSucesso"] = "Conta criada com sucesso! Agora pode iniciar sessão.";
+        return RedirectToAction("Login");
+    }
 
     public IActionResult Logout()
     {
