@@ -10,4 +10,3 @@
         public List<UserCompany> UserCompanies { get; set; } = new List<UserCompany>();
     }
 }
-

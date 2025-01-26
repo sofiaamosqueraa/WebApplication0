@@ -10,6 +10,7 @@ namespace WebApplication0.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<UserCompany> UserCompanies { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,22 @@ namespace WebApplication0.Data
                 .HasOne(uc => uc.Company)
                 .WithMany(c => c.UserCompanies)
                 .HasForeignKey(uc => uc.CompanyId);
+
+            modelBuilder.Entity<Invitation>()
+              .HasKey(i => i.Id);
+
+            modelBuilder.Entity<Invitation>()
+                .Property(i => i.Email)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<Invitation>()
+                .Property(i => i.Token)
+                .IsRequired();
+
+            modelBuilder.Entity<Invitation>()
+                .Property(i => i.EmpresasSelecionadas)
+                .IsRequired();
         }
     }
 }

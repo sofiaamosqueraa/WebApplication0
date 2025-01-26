@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Convidar Usuário";
+}
+
+<div class="container-fluid bg-light py-5">
+    <h1 class="text-center text-purple mb-4">Convidar Usuário</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" action="@Url.Action("ConvidarUsuario", "Account")" class="bg-white p-4 rounded shadow-sm">
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label text-purple">Email do Usuário</label>
+                    <input type="email" class="form-control border-mint" id="email" name="email" required />
+                </div>
+
+                <button type="submit" class="btn btn-purple w-100">Enviar Convite</button>
+            </form>
+
+            @if (TempData["Mensagem"] != null)
+            {
+                <div class="alert alert-info mt-3">
+                    @TempData["Mensagem"]
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="associarEmpresasModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" asp-action="AssociarEmpresas">
+                <div class="modal-header bg-purple text-white">
+                    <h5 class="modal-title">Associar Empresas ao Convite</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>E-mail: <strong>@TempData["Email"]</strong></p>
+                    <input type="hidden" name="token" value="@TempData["Token"]" />
+                    <label class="form-label text-purple">Empresas:</label>
+                    <div class="form-check">
+                        @foreach (var company in ViewBag.Empresas)
+                        {
+                            <div class="mb-2">
+                                <input class="form-check-input" type="checkbox" name="companyIds" value="@company.Id" id="company-@company.Id">
+                                <label class="form-check-label" for="company-@company.Id">
+                                    @company.Name
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-purple">Salvar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-purple { background-color: #8A2BE2; }
+    .text-purple { color: #8A2BE2; }
+    .btn-purple { background-color: #8A2BE2; color: white; }
+    .btn-purple:hover { background-color: #7B1FA2; color: white; }
+    .border-mint { border-color: #98FF98 !important; }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var showModal = "@TempData["ShowModal"]";
+
+        if (showModal === "true") {
+            var myModal = new bootstrap.Modal(document.getElementById('associarEmpresasModal'));
+            myModal.show();
+        }
+    });
+</script>
