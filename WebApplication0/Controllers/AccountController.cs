@@ -3,7 +3,6 @@ using WebApplication0.Data;
 using WebApplication0.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
@@ -11,11 +10,13 @@ public class AccountController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly IConfiguration _configuration;
+    private readonly string _baseUrl;
 
     public AccountController(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
         _configuration = configuration;
+        _baseUrl = _configuration["BaseUrl"] ?? throw new InvalidOperationException("BaseUrl não está configurado.");
     }
 
 
@@ -269,7 +270,7 @@ public class AccountController : Controller
 
         _context.SaveChanges();
 
-        var resetUrl = $"https://localhost:7130/Account/AceitarConvite/{token}";
+        var resetUrl = $"{_baseUrl}/Account/AceitarConvite?token={token}";
         var emailService = new EmailService(_configuration);
               
         emailService.EnviarConvitePorEmail(email, token);

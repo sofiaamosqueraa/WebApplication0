@@ -18,12 +18,13 @@ public class EmailService
         email.From.Add(MailboxAddress.Parse(_configuration["EmailSettings:SenderEmail"] ?? throw new InvalidOperationException("SenderEmail não está configurado.")));
         email.To.Add(MailboxAddress.Parse(emailDestino ?? throw new ArgumentNullException(nameof(emailDestino))));
         email.Subject = "Convite para acessar o sistema";
-        
 
+
+        var baseUrl = _configuration["BaseUrl"];
         var builder = new BodyBuilder
         {
             TextBody = $"Você foi convidado para acessar o sistema. Clique no link para aceitar o convite: " +
-                       $"https://seusite.com/AceitarConvite?token={token}"
+                       $"{baseUrl}/AceitarConvite?token={token}"
         };
 
         email.Body = builder.ToMessageBody();
