@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\AdminController.cs" />
     <Compile Remove="Views\Account\AceitarConvite.cs" />
   </ItemGroup>
 
