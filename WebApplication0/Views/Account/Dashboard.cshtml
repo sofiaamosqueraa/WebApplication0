@@ -1,10 +1,11 @@
-﻿@{
+﻿@model IEnumerable<WebApplication0.Models.Company>
+
+@{
     ViewData["Title"] = "Dashboard";
 }
 
 <div class="container-fluid min-vh-100 d-flex flex-column justify-content-center bg-light">
-
-       @if (ViewBag.SuccessMessage != null)
+    @if (ViewBag.SuccessMessage != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @ViewBag.SuccessMessage
@@ -43,9 +44,7 @@
                             </div>
                             <div class="modal-body">
                                 <form id="userProfileForm" asp-controller="Account" asp-action="UpdateUserProfile" method="post">
-                                   
                                     <input type="hidden" name="Id" value="@ViewBag.UserId" />
-
                                     <div class="mb-3">
                                         <label for="name" class="form-label" style="color: #6A0DAD;">Nome</label>
                                         <input type="text" class="form-control" id="name" name="Name" value="@ViewBag.UserName" required />
@@ -70,12 +69,9 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="text-center mb-5 py-4 rounded-4" style="background: linear-gradient(145deg, #F0FFFF, #E5FBFF);">
                     <h1 class="display-5 fw-bold mb-3" style="color: #6A0DAD;">
-                        Bem-vindo 
+                        Bem-vindo
                     </h1>
                     <h3 class="h4 fw-light" style="color: #20B2AA;">Empresas Associadas</h3>
                 </div>

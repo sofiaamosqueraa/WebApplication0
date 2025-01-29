@@ -96,23 +96,131 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
+    public IActionResult CreateCompany()
+    {
+        return View();
+    }
 
+    [HttpPost]
+    public IActionResult CreateCompany(Company company)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Companies.Add(company);
+            _context.SaveChanges();
+
+            var viewsPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Account", "CompanyDashboards");
+            Console.WriteLine($"Views Path: {viewsPath}");
+
+            if (!Directory.Exists(viewsPath))
+            {
+                Directory.CreateDirectory(viewsPath);
+                Console.WriteLine("Directory created.");
+            }
+
+
+            var fileName = $"{company.Name.Replace(" ", "")}Dashboard.cshtml";
+            var filePath = Path.Combine(viewsPath, fileName);
+            Console.WriteLine($"File Path: {filePath}");
+
+            var fileContent = $@"
+@model WebApplication0.Models.Company
+
+@{{
+    ViewData[""Title""] = ""Dashboard - {company.Name}"";
+}}
+
+<h2>Bem-vindo ao Dashboard da {company.Name}</h2>
+";
+
+            System.IO.File.WriteAllText(filePath, fileContent);
+            Console.WriteLine("File written.");
+
+            TempData["SuccessMessage"] = "Empresa criada com sucesso!";
+            return RedirectToAction("ManageCompanies");
+        }
+        return View(company);
+    }
+
+    [HttpPost]
+    public IActionResult DeleteCompany(int companyId)
+    {
+        var company = _context.Companies.Include(c => c.UserCompanies).FirstOrDefault(c => c.Id == companyId);
+        if (company != null)
+        {
+            _context.UserCompanies.RemoveRange(company.UserCompanies);
+            _context.Companies.Remove(company);
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Empresa deletada com sucesso!";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Empresa não encontrada.";
+        }
+
+        return RedirectToAction("ManageCompanies");
+    }
+    public IActionResult ManageCompanies()
+    {
+        var companies = _context.Companies.ToList();
+        return View(companies);
+    }
 
     public IActionResult InitializeCompanies()
     {
         var companies = new List<Company>
-    {
-        new Company { Name = "Lusocargo", Address = "Endereço 1" },
-        new Company { Name = "Infraspeak", Address = "Endereço 2" },
-        new Company { Name = "Corkart", Address = "Endereço 3" },
-        new Company { Name = "BSK Medical", Address = "Endereço 4" },
-        new Company { Name = "Nucase grupo", Address = "Endereço 5" }
-    };
+        {
+            new Company { Name = "Lusocargo", Address = "Endereço 1" },
+            new Company { Name = "Infraspeak", Address = "Endereço 2" },
+            new Company { Name = "Corkart", Address = "Endereço 3" },
+            new Company { Name = "BSK Medical", Address = "Endereço 4" },
+            new Company { Name = "Nucase grupo", Address = "Endereço 5" }
+        };
 
         _context.Companies.AddRange(companies);
         _context.SaveChanges();
 
         return Ok("Empresas inicializadas com sucesso.");
+    }
+    public IActionResult CompanyDashboardByName(string companyName)
+    {
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Account", "CompanyDashboards", $"{companyName.Replace(" ", "")}Dashboard.cshtml");
+        if (System.IO.File.Exists(filePath))
+        {
+            return View($"~/Views/Account/CompanyDashboards/{companyName.Replace(" ", "")}Dashboard.cshtml");
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Dashboard não encontrado.";
+            return RedirectToAction("ManageCompanies");
+        }
+    }
+
+    public IActionResult CompanyDashboardById(int companyId)
+    {
+        var userEmail = HttpContext.Session.GetString("UserEmail");
+        if (userEmail == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var user = _context.Users
+            .Include(u => u.UserCompanies)
+            .ThenInclude(uc => uc.Company)
+            .FirstOrDefault(u => u.Email == userEmail);
+
+        var company = user?.UserCompanies
+            .FirstOrDefault(uc => uc.CompanyId == companyId)?.Company;
+
+        if (company == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Company = company;
+
+        return View($"CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard");
     }
 
     [HttpGet]
@@ -153,9 +261,19 @@ public class AccountController : Controller
             return NotFound();
         }
 
-        user.UserCompanies.Clear();
+        var existingCompanyIds = user.UserCompanies.Select(uc => uc.CompanyId).ToList();
+        var companiesToRemove = existingCompanyIds.Except(companyIds).ToList();
+        foreach (var companyId in companiesToRemove)
+        {
+            var userCompany = user.UserCompanies.FirstOrDefault(uc => uc.CompanyId == companyId);
+            if (userCompany != null)
+            {
+                user.UserCompanies.Remove(userCompany);
+            }
+        }
 
-        foreach (var companyId in companyIds)
+        var companiesToAdd = companyIds.Except(existingCompanyIds).ToList();
+        foreach (var companyId in companiesToAdd)
         {
             var company = _context.Companies.Find(companyId);
             if (company != null)
@@ -169,6 +287,7 @@ public class AccountController : Controller
         return RedirectToAction("ListUsers");
     }
 
+    [Route("Account/CompanyDashboard/{companyId}")]
     public IActionResult CompanyDashboard(int companyId)
     {
         var userEmail = HttpContext.Session.GetString("UserEmail");
@@ -189,11 +308,10 @@ public class AccountController : Controller
         {
             return NotFound();
         }
-
+git init
         ViewBag.Company = company;
 
-        return View($"CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard");
-
+        return View($"~/Views/Account/CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard.cshtml");
     }
 
     [HttpPost]

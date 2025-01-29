@@ -1,0 +1,128 @@
+﻿@model IEnumerable<WebApplication0.Models.Company>
+
+@{
+    ViewData["Title"] = "Gestão de Empresas";
+}
+
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center">
+            <div class="rounded-circle p-2 me-3"
+                 style="background: linear-gradient(45deg, #6A0DAD, #40E0D0);">
+                <i class="bi bi-building fs-4 text-white"></i>
+            </div>
+            <h3 class="m-0 fw-bold" style="color: #6A0DAD;">Gestão de Empresas</h3>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <h4 class="text-purple mb-4">Adicionar Nova Empresa</h4>
+            <form method="post" asp-action="CreateCompany" class="bg-white p-4 rounded shadow-sm">
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label text-purple">Nome da Empresa</label>
+                    <input type="text" class="form-control border-mint" id="name" name="Name" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="address" class="form-label text-purple">Endereço da Empresa</label>
+                    <input type="text" class="form-control border-mint" id="address" name="Address" required />
+                </div>
+                <button type="submit" class="btn btn-purple w-100">Criar Empresa</button>
+            </form>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success mt-3">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger mt-3">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mt-5" style="border-radius: 16px;">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-borderless align-middle mb-0">
+                    <thead>
+                        <tr style="background: linear-gradient(45deg, rgba(106, 13, 173, 0.1), rgba(64, 224, 208, 0.1));">
+                            <th class="px-4 py-3 text-center" style="color: #6A0DAD;">Nome</th>
+                            <th class="px-4 py-3" style="color: #6A0DAD;">Endereço</th>
+                            <th class="px-4 py-3 text-center" style="color: #6A0DAD;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var company in Model)
+                        {
+                            <tr class="border-bottom">
+                                <td class="px-4 py-3 text-center fw-bold" style="color: #6A0DAD;">@company.Name</td>
+                                <td class="px-4 py-3" style="color: #20B2AA;">@company.Address</td>
+                                <td class="px-4 py-3 text-center">
+                                    <form method="post" asp-action="DeleteCompany" onsubmit="return confirm('Tem certeza que deseja excluir esta empresa?');" style="display:inline;">
+                                        <input type="hidden" name="companyId" value="@company.Id" />
+                                        <button type="submit" class="btn btn-sm px-3 py-2" style="background-color: #FFE5E5; color: #dc3545; border-radius: 8px; border: 1px solid rgba(220, 53, 69, 0.3);">
+                                            <i class="bi bi-trash-fill me-1"></i> Excluir
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-purple {
+        color: #6A0DAD;
+    }
+
+    .btn-purple {
+        background-color: #6A0DAD;
+        color: white;
+    }
+
+        .btn-purple:hover {
+            background-color: #7B1FA2;
+            color: white;
+        }
+
+    .border-mint {
+        border-color: #20B2AA !important;
+    }
+
+    .alert-success {
+        background-color: #E0FFFF;
+        color: #6A0DAD;
+    }
+
+    .alert-danger {
+        background-color: #FFE4E1;
+        color: #6A0DAD;
+    }
+
+    .table-bordered th, .table-bordered td {
+        border-color: #20B2AA;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        transition: all 0.3s ease;
+    }
+
+    tr:hover {
+        background: linear-gradient(45deg, rgba(106, 13, 173, 0.05), rgba(64, 224, 208, 0.05));
+    }
+
+    .modal-backdrop.show {
+        opacity: 0.7;
+    }
+</style>

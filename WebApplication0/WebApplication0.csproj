@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\CompanyDashboards\**" />
+    <Content Remove="Views\CompanyDashboards\**" />
+    <EmbeddedResource Remove="Views\CompanyDashboards\**" />
+    <None Remove="Views\CompanyDashboards\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Views\Account\AceitarConvite.cs" />
   </ItemGroup>
 
