@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
+
 public class AccountController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -29,6 +30,8 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult Register(User user)
     {
+
+        
         if (ModelState.IsValid)
         {
             _context.Users.Add(user);
@@ -51,7 +54,7 @@ public class AccountController : Controller
             TempData["Message"] = "Não tens uma conta registada. Por favor, cria uma nova conta.";
             return RedirectToAction("Register");
         }
-
+       // var teste = HttpContext.Request.Host;
         if (user.Password == model.Password)
         {
             HttpContext.Session.SetString("UserEmail", user.Email);
