@@ -96,6 +96,7 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
+    //criar empresa 
     public IActionResult CreateCompany()
     {
         return View();
@@ -142,6 +143,7 @@ public class AccountController : Controller
         return View(company);
     }
 
+   
     [HttpPost]
     public IActionResult DeleteCompany(int companyId)
     {
@@ -223,6 +225,7 @@ public class AccountController : Controller
         return View($"CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard");
     }
 
+   //lista do admin    
     [HttpGet]
     public IActionResult ListUsers()
     {
@@ -308,7 +311,7 @@ public class AccountController : Controller
         {
             return NotFound();
         }
-git init
+
         ViewBag.Company = company;
 
         return View($"~/Views/Account/CompanyDashboards/{company.Name.Replace(" ", "")}Dashboard.cshtml");
@@ -326,7 +329,7 @@ git init
         return RedirectToAction("ListUsers");
     }
 
-
+    //trocar palavrapasse
     public IActionResult UpdateUserProfile(int id, string name, string email, string newPassword)
     {
         var user = _context.Users.FirstOrDefault(u => u.Id == id);
@@ -355,6 +358,8 @@ git init
         return View();
     }
 
+   
+    //convidar usuario
     [HttpPost]
     public IActionResult ConvidarUsuario(string email, List<int> companyIds)
     {
@@ -400,6 +405,7 @@ git init
         return RedirectToAction("ConvidarUsuario");
     }
 
+    //associar empresa depois do convite
     [HttpPost]
     public IActionResult AssociarEmpresas(string token, List<int> companyIds)
     {
@@ -417,7 +423,7 @@ git init
         return RedirectToAction("ConvidarUsuario");
     }
 
-
+    //aceitar o covite
     [HttpGet]
     public IActionResult AceitarConvite(string token)
     {
