@@ -1,8 +1,100 @@
-
-@model WebApplication0.Models.Company
-
 @{
-    ViewData["Title"] = "Dashboard - Apple";
+    ViewData["Title"] = "Dashboard da Infraspeak";
 }
 
-<h2>Bem-vindo ao Dashboard da Apple</h2>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center"
+     style="background: linear-gradient(135deg, #E8F4FE, #D1E9FC, #B9DFFA);">
+    <div class="row py-5 text-center">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold mb-3" style="color: #1E4D91;">
+                Dashboard da <span style="color: #2E7DD1;">Infraspeak</span>
+            </h1>
+            <h3 class="mb-5 fst-italic" style="color: #2C5282;">Soluções Inteligentes para Facility Management</h3>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100"
+                 style="background: linear-gradient(145deg, #FFFFFF, #F8FBFE); border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-3" style="color: #1E4D91;">Bem-vindo à Infraspeak</h5>
+                    <p class="card-text" style="color: #2C5282;">
+                        Infraspeak oferece soluções avançadas para gestão de manutenção e ativos, garantindo inovação e eficiência operacional em diversos setores.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100"
+                 style="background: linear-gradient(145deg, #FFFFFF, #F8FBFE); border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-3" style="color: #1E4D91;">Benefícios Principais</h5>
+                    <ul class="list-unstyled" style="color: #2C5282;">
+                        <li class="mb-2"><i class="fas fa-check-circle me-2" style="color: #2E7DD1;"></i>Controle total das operações</li>
+                        <li class="mb-2"><i class="fas fa-balance-scale me-2" style="color: #2E7DD1;"></i>Cumprimento normativo</li>
+                        <li><i class="fas fa-chart-line me-2" style="color: #2E7DD1;"></i>Aumento da produtividade</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100"
+                 style="background: linear-gradient(145deg, #FFFFFF, #F8FBFE); border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-3" style="color: #1E4D91;">Plataforma IMMP</h5>
+                    <ul class="list-unstyled" style="color: #2C5282;">
+                        <li class="mb-2"><i class="fas fa-cogs me-2" style="color: #2E7DD1;"></i>Mantenimiento basado em uso</li>
+                        <li><i class="fas fa-clock me-2" style="color: #2E7DD1;"></i>Reducción del MTTR</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100"
+                 style="background: linear-gradient(145deg, #FFFFFF, #F8FBFE); border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-3" style="color: #1E4D91;">Métricas de Desempenho</h5>
+                    <ul class="list-unstyled" style="color: #2C5282;">
+                        <li class="mb-2"><i class="fas fa-tasks me-2" style="color: #2E7DD1;"></i>Tickets resolvidos: <strong>150</strong></li>
+                        <li class="mb-2"><i class="fas fa-clock me-2" style="color: #2E7DD1;"></i>Tempo médio de resposta: <strong>2.5 horas</strong></li>
+                        <li><i class="fas fa-smile me-2" style="color: #2E7DD1;"></i>Satisfação do cliente: <strong>95%</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <div class="col-md-12">
+            <div class="card border-0 shadow-sm"
+                 style="background: linear-gradient(145deg, #FFFFFF, #F8FBFE); border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold mb-3" style="color: #1E4D91;">Setores Atendidos</h5>
+                    <p class="card-text" style="color: #2C5282;">
+                        <i class="fas fa-building me-2" style="color: #2E7DD1;"></i>Hotelaria, Elevadores, Facility Management, Saúde, Retail, Instituições Educativas, entre outros.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-12 text-center">
+            <a href="@Url.Action("Dashboard", "Account")"
+               class="btn btn-lg shadow-sm px-4 py-2"
+               style="background: linear-gradient(45deg, #1E4D91, #2E7DD1);
+                      color: #FFF;
+                      border: none;
+                      border-radius: 10px;
+                      transition: all 0.3s ease;">
+                <i class="fas fa-arrow-left me-2"></i>Voltar para Lista de Empresas
+            </a>
+        </div>
+    </div>
+</div>

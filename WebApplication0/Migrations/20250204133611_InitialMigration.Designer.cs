@@ -12,8 +12,8 @@ using WebApplication0.Data;
 namespace WebApplication0.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250122144338_AddDataCriacaoToInvitation")]
-    partial class AddDataCriacaoToInvitation
+    [Migration("20250204133611_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -19,6 +19,14 @@
 
   <ItemGroup>
     <Content Remove="Views\Account\CompanyDashboards\AmazonDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\AppleDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\BSKMedicalDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\CorkartDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\EPFDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\InfraspeakDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\MicrosoftDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\nnDashboard.cshtml" />
+    <Content Remove="Views\Account\CompanyDashboards\PontualDashboard.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
   </ItemGroup>
 
