@@ -15,7 +15,10 @@ RUN dotnet build "WebApplication0.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "WebApplication0.csproj" -c Release -o /app/publish
 
+# Use a imagem base para execução
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Defina o comando de inicialização
 ENTRYPOINT ["dotnet", "WebApplication0.dll"]
